@@ -4,18 +4,18 @@ import os
 import argparse
 
 # Constants
-SAMPLE_RATE = 44100  # Hz, standard audio sample rate
-MAX_FREQ = SAMPLE_RATE // 2  # Hz, Nyquist frequency
-FREQ_STEP = 1000  # Hz, frequency step between encoding bands
-SEGMENT_DURATION = 0.1  # seconds, duration of each encoded segment
+SAMPLE_RATE = 44100 # Hz, standard audio sample rate
+MAX_FREQ = SAMPLE_RATE // 2 # Hz, Nyquist frequency
+FREQ_STEP = 100 # Hz, frequency step between encoding bands
+SEGMENT_DURATION = 0.1 # seconds, duration of each encoded segment
 
 # Derived constants
 MAX_BANDS = MAX_FREQ // FREQ_STEP
-USABLE_BANDS = MAX_BANDS - 1  # Exclude 0 Hz band
-SEGMENT_BYTES = ((USABLE_BANDS - 1) // 8)  # Remove top band for flag
+USABLE_BANDS = MAX_BANDS - 1 # Exclude 0 Hz band
+SEGMENT_BYTES = ((USABLE_BANDS - 1) // 8) # Remove top band for flag
 SEGMENT_BITS = SEGMENT_BYTES * 8 # Number of bits per segment
-FLAG_BAND = (USABLE_BANDS + 1) * FREQ_STEP  # Special flag frequency
-AMPLITUDE = 1 / (MAX_BANDS + 1)  # Amplitude for each frequency component
+FLAG_BAND = (USABLE_BANDS + 1) * FREQ_STEP # Special flag frequency
+AMPLITUDE = 1 / (MAX_BANDS + 1) # Amplitude for each frequency component
 
 def encode_segment(bytes):
     """
