@@ -1,0 +1,6 @@
+[submodule "lib/AudioFile"]
+	path = lib/AudioFile
+	url = https://github.com/adamstark/AudioFile.git
+[submodule "lib/kissfft"]
+	path = lib/kissfft
+	url = https://github.com/mborgerding/kissfft.git

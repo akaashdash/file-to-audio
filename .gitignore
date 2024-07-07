@@ -47,7 +47,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+#lib/
 lib64/
 parts/
 sdist/
@@ -196,4 +196,5 @@ cython_debug/
 
 # Custom
 .DS_Store
-test/
+bin/
+obj/
