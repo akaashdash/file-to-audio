@@ -41,8 +41,16 @@ std::vector<float> encodeData(const std::vector<uint8_t>& data) {
     std::vector<float> audio;
     for (size_t i = 0; i < data.size(); i += SEGMENT_BYTES) {
         std::vector<uint8_t> segment(data.begin() + i, data.begin() + std::min(i + SEGMENT_BYTES, data.size()));
-        auto segmentSignal = encodeSegment(segment);
-        audio.insert(audio.end(), segmentSignal.begin(), segmentSignal.end());
+        if (segment.size() < SEGMENT_BYTES) {
+            for (size_t j = 0; j < segment.size(); ++j)  {
+                std::vector<uint8_t> byte{segment[j]};
+                std::vector<float> byteSignal = encodeSegment(byte);
+                audio.insert(audio.end(), byteSignal.begin(), byteSignal.end());
+            }
+        } else {
+            std::vector<float> segmentSignal = encodeSegment(segment);
+            audio.insert(audio.end(), segmentSignal.begin(), segmentSignal.end());
+        }
     }
     return audio;
 }
