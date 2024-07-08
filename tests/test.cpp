@@ -88,7 +88,7 @@ TEST_CASE("Test Small Image File", "[image]") {
     REQUIRE(originalData.size() >= 8);  // PNG files are at least 8 bytes
     REQUIRE(decodedData.size() >= 8);
     
-    // Check PNG signature
+    // Check PNG signature for corruption
     std::vector<uint8_t> pngSignature = {137, 80, 78, 71, 13, 10, 26, 10};
     REQUIRE(std::equal(pngSignature.begin(), pngSignature.end(), originalData.begin()));
     REQUIRE(std::equal(pngSignature.begin(), pngSignature.end(), decodedData.begin()));

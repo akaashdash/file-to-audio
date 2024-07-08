@@ -54,9 +54,11 @@ std::vector<uint8_t> decodeData(const std::vector<float>& data) {
     int segmentSamples = static_cast<int>(SAMPLE_RATE * SEGMENT_DURATION);
 
     for (size_t i = 0; i < data.size(); i += segmentSamples) {
+        // Decode segment
         std::vector<float> segment(data.begin() + i, data.begin() + std::min(i + segmentSamples, data.size()));
-        auto bits = decodeSegment(segment);
+        std::vector<bool> bits = decodeSegment(segment);
 
+        // Convert segment bits to bytes
         for (size_t j = 0; j < bits.size(); j += 8) {
             if (j + 8 <= bits.size()) {
                 uint8_t byte = 0;
